@@ -104,11 +104,30 @@
 			bombsPlaced = true;
 		}
 		tiles[index].visible = true;
-		const clickedBomb = tiles[index].value === '💣';
+
 		const row = Math.floor(index / SIZE);
 		const col = index % SIZE;
 		const seen = new Set();
 		floodFill(row, col, seen);
+
+		const clickedBomb = tiles[index].value === '💣';
+		if (clickedBomb) {
+			setTimeout(() => {
+				// Wait to finish the render
+				alert('Game Over!');
+			});
+		}
+
+		if (gameWon()) {
+			setTimeout(() => {
+				// Wait to finish the render
+				alert('You Win!');
+			});
+		}
+	}
+
+	function gameWon() {
+		return tiles.filter((tile) => tile.value !== '💣' && !tile.visible).length === 0;
 	}
 
 	function resetBoard() {
