@@ -15,11 +15,11 @@
 		return data;
 	}
 
-	function setupBombs() {
+	function setupBombs(index) {
 		let bombCount = 10;
 		while (bombCount > 0) {
 			const placementIndex = Math.round(Math.random() * SIZE * SIZE) - 1;
-			if (tiles[placementIndex].value === '💣') {
+			if (tiles[placementIndex].value === '💣' || placementIndex === index) {
 				continue;
 			}
 			tiles[placementIndex].value = '💣';
@@ -100,7 +100,7 @@
 	 */
 	function tileClicked(index) {
 		if (!bombsPlaced) {
-			setupBombs();
+			setupBombs(index);
 			bombsPlaced = true;
 		}
 		tiles[index].visible = true;
