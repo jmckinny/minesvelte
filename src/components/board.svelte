@@ -34,7 +34,7 @@
 	}
 
 	function isBombAt(row, col) {
-		if (row < 0 || row > SIZE || col < 0 || col > SIZE) {
+		if (row < 0 || row >= SIZE || col < 0 || col >= SIZE) {
 			return false;
 		}
 
@@ -74,6 +74,28 @@
 
 	/**
 	 *
+	 * @param {number} row
+	 * @param {number} col
+	 * @param {Set<number>} seen
+	 */
+	function floodFill(row, col, seen) {
+		if (row < 0 || row >= SIZE || col < 0 || col >= SIZE || seen.has(getTileIndex(row, col))) {
+			return;
+		}
+		seen.add(getTileIndex(row, col));
+		tiles[getTileIndex(row, col)].visible = true;
+		if (tiles[getTileIndex(row, col)].value === 0) {
+			floodFill(row + 1, col, seen);
+			floodFill(row - 1, col, seen);
+			floodFill(row, col - 1, seen);
+			floodFill(row, col + 1, seen);
+		} else {
+			return;
+		}
+	}
+
+	/**
+	 *
 	 * @param {number} index
 	 */
 	function tileClicked(index) {
@@ -83,6 +105,10 @@
 		}
 		tiles[index].visible = true;
 		const clickedBomb = tiles[index].value === '💣';
+		const row = Math.floor(index / SIZE);
+		const col = index % SIZE;
+		const seen = new Set();
+		floodFill(row, col, seen);
 	}
 
 	function resetBoard() {
