@@ -9,7 +9,7 @@
 		let data = [];
 		for (let i = 0; i < SIZE; i++) {
 			for (let j = 0; j < SIZE; j++) {
-				data.push({ value: 0, visible: false });
+				data.push({ value: 0, visible: false, flagged: false });
 			}
 		}
 		return data;
@@ -134,13 +134,19 @@
 		tiles = createEmptyBoard();
 		bombsPlaced = false;
 	}
+
+	function flagTile(index) {
+		const tile = tiles[index];
+		tile.flagged = true;
+		tiles = tiles; // trigger update
+	}
 </script>
 
 <div class="flex-col">
 	<div class="grid grid-cols-9 grid-rows-9">
 		{#each tiles as tile, i}
-			<button on:click={() => tileClicked(i)}>
-				<Tile value={tile.value} visible={tile.visible} />
+			<button on:click={() => tileClicked(i)} on:contextmenu|preventDefault={() => flagTile(i)}>
+				<Tile value={tile.value} visible={tile.visible} flagged={tile.flagged} />
 			</button>
 		{/each}
 	</div>
