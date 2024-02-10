@@ -137,7 +137,7 @@
 
 	function flagTile(index) {
 		const tile = tiles[index];
-		tile.flagged = true;
+		tile.flagged = !tile.flaggedz;
 		tiles = tiles; // trigger update
 	}
 </script>
