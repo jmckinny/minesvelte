@@ -1,5 +1,9 @@
 <script>
 	import Tile from './tile.svelte';
+	import { getModalStore } from '@skeletonlabs/skeleton';
+
+	const modalStore = getModalStore();
+
 	const SIZE = 9;
 	let bombsPlaced = false;
 
@@ -114,14 +118,29 @@
 		if (clickedBomb) {
 			setTimeout(() => {
 				// Wait to finish the render
-				alert('Game Over!');
+				const modal = {
+					type: 'alert',
+					// Data
+					title: 'Game Over',
+					body: 'You lose!',
+					buttonTextCancel: 'Reset',
+					response: () => resetBoard()
+				};
+				modalStore.trigger(modal);
 			});
 		}
 
 		if (gameWon()) {
 			setTimeout(() => {
 				// Wait to finish the render
-				alert('You Win!');
+				const modal = {
+					type: 'alert',
+					// Data
+					title: 'Winner',
+					buttonTextCancel: 'Hurray!',
+					response: () => resetBoard()
+				};
+				modalStore.trigger(modal);
 			});
 		}
 	}
