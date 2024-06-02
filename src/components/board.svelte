@@ -22,8 +22,8 @@
 	function setupBombs(index) {
 		let bombCount = 10;
 		while (bombCount > 0) {
-			const placementIndex = Math.round(Math.random() * SIZE * SIZE) - 1;
-			if (tiles[placementIndex].value === '💣' || placementIndex === index) {
+			const placementIndex = Math.floor(Math.random() * SIZE * SIZE);
+			if (tiles[placementIndex].value === '💣' || toCloseToStart(placementIndex, index)) {
 				continue;
 			}
 			tiles[placementIndex].value = '💣';
@@ -31,6 +31,21 @@
 		}
 
 		updateBombCounts();
+	}
+
+	function toCloseToStart(bombIndex, startIndex) {
+		const bombLocation = getTileRowCol(bombIndex);
+		const startLocation = getTileRowCol(startIndex);
+		const rowDist = Math.abs(bombLocation.row - startLocation.row);
+		const colDist = Math.abs(bombLocation.col - startLocation.col);
+		return rowDist <= 1 && colDist <= 1;
+	}
+
+	function getTileRowCol(index) {
+		return {
+			row: index % SIZE,
+			col: Math.floor(index / SIZE)
+		};
 	}
 
 	function getTileIndex(row, col) {
