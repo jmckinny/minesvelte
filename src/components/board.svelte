@@ -89,10 +89,19 @@
 		seen.add(getTileIndex(row, col));
 		tiles[getTileIndex(row, col)].visible = true;
 		if (tiles[getTileIndex(row, col)].value === 0) {
+			// Up
 			floodFill(row + 1, col, seen);
+			// Down
 			floodFill(row - 1, col, seen);
+			// Left
 			floodFill(row, col - 1, seen);
+			// Right
 			floodFill(row, col + 1, seen);
+			// Diags
+			floodFill(row + 1, col + 1, seen);
+			floodFill(row + 1, col - 1, seen);
+			floodFill(row - 1, col - 1, seen);
+			floodFill(row - 1, col + 1, seen);
 		} else {
 			return;
 		}
