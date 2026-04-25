@@ -1,8 +1,11 @@
 <script lang="ts">
+	import Gameover from './gameover.svelte';
 	import Tile from './tile.svelte';
 
 	const SIZE = 9;
 	let bombsPlaced = false;
+	let gameoverMessage = $state('');
+	let gameoverOpen = $state(false);
 
 	interface Tile {
 		value: number | string;
@@ -133,17 +136,11 @@
 
 		const clickedBomb = tiles[index].value === '💣';
 		if (clickedBomb) {
-			setTimeout(() => {
-				// Wait to finish the render
-				alert('You Lose!');
-			});
-		}
-
-		if (gameWon()) {
-			setTimeout(() => {
-				// Wait to finish the render
-				alert('Winner!');
-			});
+			gameoverMessage = 'You Lose!';
+			gameoverOpen = true;
+		} else if (gameWon()) {
+			gameoverMessage = 'Winner!';
+			gameoverOpen = true;
 		}
 	}
 
@@ -167,6 +164,8 @@
 		flagTile(index);
 	}
 </script>
+
+<Gameover message={gameoverMessage} bind:open={gameoverOpen} reset={() => resetBoard()} />
 
 <div class="grid w-[min(100%,60vh)] grid-cols-9 grid-rows-9">
 	{#each tiles as tile, i}
