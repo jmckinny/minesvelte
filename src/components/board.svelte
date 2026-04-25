@@ -168,7 +168,7 @@
 <Gameover message={gameoverMessage} bind:open={gameoverOpen} reset={() => resetBoard()} />
 
 <div class="grid w-[min(100%,60vh)] grid-cols-9 grid-rows-9">
-	{#each tiles as tile, i}
+	{#each tiles as tile, i (i)}
 		<button
 			class="aspect-square w-full"
 			onclick={() => tileClicked(i)}
