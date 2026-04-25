@@ -12,7 +12,6 @@
 	onOpenChange={(details) => {
 		open = details.open;
 		if (!open) {
-			console.log('reset');
 			reset();
 		}
 	}}
