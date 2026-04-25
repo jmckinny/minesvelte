@@ -3,7 +3,7 @@
 </script>
 
 <div class="flex justify-center">
-	<h1 class="h1 p-8">Minesweeper</h1>
+	<h1 class="p-8 h1">Minesweeper</h1>
 </div>
 <div class="flex justify-center">
 	<Board />
