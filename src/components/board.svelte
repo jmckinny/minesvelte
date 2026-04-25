@@ -177,6 +177,6 @@
 		{/each}
 	</div>
 	<div class="flex-row">
-		<button onclick={resetBoard} class="btn variant-filled m-4">Reset</button>
+		<button onclick={resetBoard} class="btn preset-filled m-4">Reset</button>
 	</div>
 </div>
