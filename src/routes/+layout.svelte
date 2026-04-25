@@ -1,8 +1,9 @@
-<script>
-	import '../app.postcss';
-	import { initializeStores, Modal } from '@skeletonlabs/skeleton';
-	initializeStores();
+<script lang="ts">
+	import './layout.css';
+	import favicon from '$lib/assets/favicon.svg';
+
+	let { children } = $props();
 </script>
 
-<Modal />
-<slot />
+<svelte:head><link rel="icon" href={favicon} /></svelte:head>
+{@render children()}
