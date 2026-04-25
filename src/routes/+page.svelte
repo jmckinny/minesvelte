@@ -1,2 +1,10 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+	import Board from '../components/board.svelte';
+</script>
+
+<div class="flex justify-center">
+	<h1 class="h1 p-8">Minesweeper</h1>
+</div>
+<div class="flex justify-center">
+	<Board />
+</div>
