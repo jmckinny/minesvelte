@@ -168,15 +168,17 @@
 	}
 </script>
 
-<div class="flex-col">
-	<div class="grid grid-cols-9 grid-rows-9">
-		{#each tiles as tile, i}
-			<button onclick={() => tileClicked(i)} oncontextmenu={(e) => handleContextMenu(e, i)}>
-				<Tile value={tile.value} visible={tile.visible} flagged={tile.flagged} />
-			</button>
-		{/each}
-	</div>
-	<div class="flex-row">
+<div class="grid w-[min(100%,60vh)] grid-cols-9 grid-rows-9">
+	{#each tiles as tile, i}
+		<button
+			class="aspect-square w-full"
+			onclick={() => tileClicked(i)}
+			oncontextmenu={(e) => handleContextMenu(e, i)}
+		>
+			<Tile value={tile.value} visible={tile.visible} flagged={tile.flagged} />
+		</button>
+	{/each}
+	<div>
 		<button onclick={resetBoard} class="m-4 btn preset-filled">Reset</button>
 	</div>
 </div>
